@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+
+body {
+    margin: 0 auto;
+    padding: 5rem;
+    background-color: #1F1C21;
+    color: whitesmoke;
+    font-family: 'Oswald', sans-serif;;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.wrapper {
+    width: 600px;
+}
+
+.grid-table {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+/*.grid-countries {*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(5, 1fr);*/
+/*    grid-template-rows: repeat(1, 1fr);*/
+/*    grid-column-gap: 20px;*/
+/*    grid-row-gap: 0px;*/
+/*    align-items: center;*/
+/*    margin-top: 50px;*/
+/*    justify-content: center;*/
+/*}*/
+
+.grid-countries {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.countries-flag {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+}
+
+.countries-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+}
+
+.grid-total {
+    display: flex;
+    justify-content: space-around;
+}
