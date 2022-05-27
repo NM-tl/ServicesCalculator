@@ -41,12 +41,12 @@ const countries = [
 ];
 
 function renderService(item) {
-    return `<div><input type="checkbox" id="${item.name}" value="${item.name}">
-            <label for="${item.name}">${item.name}</label></div>`
+    return `<div><input type="checkbox" id="service" value="${item.name}">
+            <label for="service">${item.name}</label></div>`
 }
 
 function renderDesign(item) {
-    return `<option value="${item.name}">${item.name}</option>`
+    return `<option value="${item.name}" >${item.name}</option>`
 }
 
 function renderCountry(items) {
@@ -55,4 +55,33 @@ function renderCountry(items) {
                 <div className="item-name">${items.name}</div>
 </div>`
 }
+
+function calc() {
+    const designPrice = services.map((i) => i.price);
+    const servicesPrice = design.map((i) => i.price);
+    const countriesPercent = countries.map((i) => i.percent);
+
+    // return console.log(...designPrice)
+
+    function arraySum(arr) {
+        let sum = 0;
+        for(let i = 0; i < arr.length; i++){
+            sum += arr[i];
+        }
+        return sum;
+    }
+
+    const total = () => (arraySum(designPrice) + arraySum(servicesPrice)) / 100 * arraySum(countriesPercent);
+
+
+    function renderTotal(totalPrice) {
+        return document.querySelector('.total').innerHTML = total(totalPrice);
+    }
+
+    renderTotal()
+}
+
+calc();
+
+
 
