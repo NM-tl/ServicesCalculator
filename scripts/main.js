@@ -1,14 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     const listDesign = document.querySelector('.form-design')
     const listServices = document.querySelector('.form-services')
+    const listCountry = document.querySelector('.countries');
+
     const listCountries = document.querySelector('.grid-countries')
 
     const total = document.querySelector('.total')
 
     const renderDesignList = design.map(renderDesign)
     const renderServicesList = services.map(renderService)
-    const renderCountriesList = countries.map(renderCountry)
+    const renderCountryList = countries.map(renderSelectCountry)
     const percent = countries.map(getPercent)
+
+    const renderCountriesList = countries.map(renderCountry)
 
     if (listServices && Array.isArray(renderServicesList)) {
         listServices.innerHTML = renderServicesList.join('');
@@ -18,12 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
         listDesign.innerHTML = renderDesignList.join('');
     }
 
+    if (listCountry && Array.isArray(renderCountryList)) {
+        listCountry.innerHTML = renderCountryList.join('');
+    }
+
     if(listCountries && Array.isArray(renderCountriesList)) {
         listCountries.innerHTML = renderCountriesList.join('');
     }
 
     const inputs = document.querySelectorAll('input')
     const resultList = document.querySelector('.result')
+    // variable for test
+    const resultTotal = document.querySelector('.result-total')
 
     function calc() {
         let totalPrice = 0;
@@ -33,7 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (input.checked) {
 
                     totalPrice += parseInt(input.value);
-                    total.innerHTML = `Total Price: ${totalPrice}$`;
+                    total.innerHTML = `${totalPrice}$`;
+
+                    resultTotal.innerHTML = `${totalPrice}`;
 
                     const result = percent.map((num) => parseInt(totalPrice) / 100 * num + parseInt(totalPrice));
                     const renderResultList = result.map(renderResult)
@@ -43,7 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 } else if (!input.checked) {
                     totalPrice -= parseInt(input.value);
-                    total.innerHTML = `Total Price: ${totalPrice}$`;
+                    total.innerHTML = `${totalPrice}$`;
+
+                    resultTotal.innerHTML = `${totalPrice}`;
+
 
                     const result = percent.map((num) => parseInt(totalPrice) / 100 * num + parseInt(totalPrice));
                     const renderResultList = result.map(renderResult)
@@ -97,6 +112,10 @@ function renderService(item) {
                 <input type="checkbox" name="checkbox" class="service" value="${item.price}" id="cb-${item.name.toLowerCase()}">
                 <label for="cb-${item.name.toLowerCase()}"></label>${item.name}
             </span>`
+}
+
+function renderSelectCountry(item) {
+    return `<option value="${item.name.toLowerCase()}">${item.name}</option>`
 }
 
 function renderCountry(items) {

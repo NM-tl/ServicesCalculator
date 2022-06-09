@@ -7,25 +7,54 @@
 </head>
 <body>
 
-<h1>Simple Calculator Services</h1>
+<div class="header">
+    <h2>Simple Calculator Services</h2>
+</div>
+<div class="intro">
+    <h2>To calculate the cost of your project, just select what the project will include</h2>
+    <p>Calculate your project in a minute:</p>
+</div>
 
 <div class="wrapper">
-    <div class="grid-table"></div>
+    <div class="wrapper-calc">
+        <form>
+            <label class="form-label"><h3>Choose your country:</h3></label>
+            <select name="country" id="country" class="countries"></select>
+            <label class="form-label"><h3>Please select your project:</h3></label>
+            <div class="form-design"></div>
+            <label class="form-label"><h3>For what we do:</h3></label>
+            <div class="form-services"></div>
+        </form>
+        <div class="calc-inner">
+            <div class="icon"><img src="assets/images/js.png"></div>
+            <div class="calc-total">
+                <label class="calc-total__label"><h3>Total:</h3></label>
+                <div class="total">...</div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper-result">
+        <div class="result-inner">
+            <div class="result-block">
+                <div class="result-label"><h3>Your total payment will be</h3></div>
+                <div class="result-payment">
+                    <div class="result-currency">$</div>
+                    <div class="result-total">...</div>
+                </div>
+                <div class="result-info">
+                    <div class="country-name">Ukraine</div>
+                    <div class="country-icon" style="background-image: url('assets/images/ua.svg')"></div>
+                    <div class="country-percent">5%</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="wrapper-form">
-    <form>
-        <label><h3>Please select your project:</h3></label>
-        <div class="form-design"></div>
-        <label><h3>For what we do:</h3></label>
-        <div class="form-services">
-        </div>
-    </form>
     <h2>Total for country:</h2>
     <div class="grid-countries"></div>
-    <div class="grid-total"></div>
     <div class="result"></div>
-    <div class="total"></div>
 </div>
 <script src="/scripts/main.js"></script>
 </body>
