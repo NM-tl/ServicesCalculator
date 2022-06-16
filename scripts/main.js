@@ -2,17 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const listDesign = document.querySelector('.form-design')
     const listServices = document.querySelector('.form-services')
     const listCountry = document.querySelector('.countries');
-    const resultInfo = document.querySelector('.result-info')
     const listCountries = document.querySelector('.grid-countries')
-
     const total = document.querySelector('.total')
+    const resultInfo = document.querySelector('.result-info')
 
+    const renderCountryList = countries.map(renderSelectCountry)
     const renderDesignList = design.map(renderDesign)
     const renderServicesList = services.map(renderService)
-    const renderCountryList = countries.map(renderSelectCountry)
     const percent = countries.map(getPercent)
-
-
     const renderCountriesList = countries.map(renderCountry)
 
     if (listServices && Array.isArray(renderServicesList)) {
@@ -31,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         listCountries.innerHTML = renderCountriesList.join('');
     }
 
+    const select = document.querySelector('select');
     const inputs = document.querySelectorAll('input')
     const resultList = document.querySelector('.result')
     const resultTotal = document.querySelector('.result-total')
@@ -41,27 +39,26 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const input of inputs) {
             input.addEventListener('input', function() {
                 if (input.checked) {
-                    const select = document.querySelector('select');
                     let option = select.options[select.selectedIndex];
 
                     let selectedCountryName = option.text;
                     let selectedCountryImg = option.id;
                     let selectedCountryPercent = option.value;
 
-                    let op = [{
+                    let selectedOption = [{
                         name: selectedCountryName,
                         percent: selectedCountryPercent,
                         img: selectedCountryImg
                     }];
 
-                    const resInfo = op.map(renderI)
+                    const resultInfoValues = selectedOption.map(renderInfo)
 
-                    if(resultInfo && Array.isArray(resInfo)) {
-                        resultInfo.innerHTML = resInfo.join('');
+                    if(resultInfo && Array.isArray(resultInfoValues)) {
+                        resultInfo.innerHTML = resultInfoValues.join('');
                     }
 
                     let countryPercent = listCountry.value;
-                    // Total result
+                    // TotalResult
                     totalPrice += parseInt(input.value);
                     total.innerHTML = `${totalPrice}$`;
                     // ResultInfo
@@ -75,11 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         resultList.innerHTML = renderResultList.join('');
                     }
                 } else if (!input.checked) {
+                    // TotalResult
                     totalPrice -= parseInt(input.value);
                     total.innerHTML = `${totalPrice}$`;
-
+                    // ResultInfo
                     resultTotal.innerHTML = `${totalPrice}`;
-
+                    // FooterResult - fix
                     const result = percent.map((num) => parseInt(totalPrice) / 100 * num + parseInt(totalPrice));
                     const renderResultList = result.map(renderResult)
 
@@ -113,8 +111,7 @@ const countries = [
 ];
 
 
-function renderI(item) {
-    console.log(item)
+function renderInfo(item) {
     return `<div class="country-name">${item.name}</div>
             <div class="country-icon" style="background-image: url('assets/images/${item.img}.svg')"></div>
             <div class="country-percent">${item.percent}%</div>`
@@ -154,4 +151,22 @@ function renderCountry(items) {
 function getPercent(item) {
     return item.percent;
 }
+
+const switchBtn = document.querySelector('.switch');
+
+switchBtn.addEventListener('click', function switchMode () {
+    const el = document.body;
+    const header = document.querySelector('.header');
+    const switchBtn = document.querySelector('.switch');
+    const resultBlock = document.querySelector('.result-block');
+    const resultCurrency = document.querySelector('.result-currency');
+    const wCountries = document.querySelector('.wrapper-countries')
+
+    el.classList.toggle('body-dark');
+    header.classList.toggle('header-dark');
+    switchBtn.classList.toggle('switch-dark');
+    resultBlock.classList.toggle('result-block__dark');
+    resultCurrency.classList.toggle('result-currency__dark');
+    wCountries.classList.toggle('wrapper-countries__dark')
+});
 

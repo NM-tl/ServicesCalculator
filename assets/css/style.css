@@ -25,16 +25,44 @@ h3 {
     overflow: hidden;
     padding: 0 3.75rem;
     background: #ffffff;
-    box-shadow:  20px 20px 60px #d9d9d9,
-    -20px -20px 60px #ffffff;
+    box-shadow:  10px 10px 20px #d9d9d9,
+    -10px -10px 20px #ffffff;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.switcher {
+    display: flex;
+    width: 7.5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.switch {
+    background: #100f2c;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    right: 32px;
+    bottom: 32px;
+    left: unset;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .intro {
-    padding: 2.5rem 3.75rem;
+    padding: 2.5rem 3.75rem 0;
 }
 
 .wrapper {
-    padding: 0 3.75rem;
+    padding: 2.5rem 3.75rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -107,8 +135,7 @@ select#country {
     justify-content: flex-start;
     border-radius: 50px;
     background: #ffffff;
-    box-shadow:  20px 20px 60px #d9d9d9,
-    -20px -20px 60px #ffffff;
+    box-shadow: 10px 10px 20px #d9d9d9, -10px -10px 20px #ffffff;
 }
 
 .result-payment {
@@ -149,8 +176,12 @@ select#country {
     margin-right: 10px;
 }
 
-.wrapper-form {
-    padding: 20px 2.5rem;
+.wrapper-countries {
+    padding: 1rem 2.5rem;
+    background: #ffffff;
+    box-shadow: -10px -10px 20px #d9d9d9, 10px 10px 20px #ffffff;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
 }
 
 .grid-table {
@@ -180,7 +211,7 @@ select#country {
 .countries-container {
     display: flex;
     flex-direction: row;
-    width: 100px;
+    width: 120px;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
@@ -196,4 +227,56 @@ select#country {
 .result {
     display: flex;
     justify-content: space-around;
+}
+
+/* Dark Mode CSS */
+/*  #191919  */
+
+.header-dark {
+    color: #CDCDCD;
+    background: linear-gradient(90deg, #101116, #13141a);
+    box-shadow: -10px 10px 10px #0f1014, 10px -10px 10px #15161c;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.body-dark {
+    background-color: #17181F;
+    color: #CDCDCD;
+}
+
+.switch-dark {
+    background-color: whitesmoke;
+}
+
+.result-block__dark {
+    background: linear-gradient(90deg, rgba(15,12,41,1) 0%, rgba(48,43,99,1) 100%);
+    box-shadow: 10px 10px 20px #0d0b0f, -10px -10px 20px #110f15;
+}
+
+.result-currency__dark {
+    color: aqua;
+}
+
+.wrapper-countries__dark {
+    background: linear-gradient(90deg, #101116, #13141a);
+    box-shadow: -10px 10px 10px #0f1014, 10px -10px 10px #15161c;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+/*  Media  */
+
+@media only screen and (max-device-width: 1068px) {
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .wrapper-calc {
+        padding: 0 0 2.5rem 0;
+    }
 }
