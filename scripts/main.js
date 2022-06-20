@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         listCountry.innerHTML = renderCountryList.join('');
     }
 
-    if(listCountries && Array.isArray(renderCountriesList)) {
+    if (listCountries && Array.isArray(renderCountriesList)) {
         listCountries.innerHTML = renderCountriesList.join('');
     }
 
@@ -36,54 +36,49 @@ document.addEventListener('DOMContentLoaded', () => {
     function calc() {
         let totalPrice = 0;
 
+        function calcAll() {
+
+            const finalResult = parseInt(totalPrice) / 100 * listCountry.value + parseInt(totalPrice);
+            resultTotal.innerHTML = `${finalResult}`;
+
+            const result = percent.map((num) => parseInt(totalPrice) / 100 * num + parseInt(totalPrice));
+            const renderResultList = result.map(renderResult)
+
+            if(resultList && Array.isArray(renderResultList)) {
+                resultList.innerHTML = renderResultList.join('');
+            }
+
+            const option = select.options[select.selectedIndex];
+
+            const selectedOption = [{
+                name: option.text || '',
+                percent: option.value || '',
+                img: option.id || ''
+            }];
+
+            const resultInfoValues = selectedOption.map(renderInfo)
+
+            if (resultInfo && Array.isArray(resultInfoValues)) {
+                resultInfo.innerHTML = resultInfoValues.join('');
+            }
+        }
+
         for (const input of inputs) {
             input.addEventListener('input', function() {
                 if (input.checked) {
-                    let option = select.options[select.selectedIndex];
 
-                    let selectedCountryName = option.text;
-                    let selectedCountryImg = option.id;
-                    let selectedCountryPercent = option.value;
-
-                    let selectedOption = [{
-                        name: selectedCountryName,
-                        percent: selectedCountryPercent,
-                        img: selectedCountryImg
-                    }];
-
-                    const resultInfoValues = selectedOption.map(renderInfo)
-
-                    if(resultInfo && Array.isArray(resultInfoValues)) {
-                        resultInfo.innerHTML = resultInfoValues.join('');
-                    }
-
-                    let countryPercent = listCountry.value;
-                    // TotalResult
                     totalPrice += parseInt(input.value);
                     total.innerHTML = `${totalPrice}$`;
-                    // ResultInfo
-                    const finalResult = parseInt(totalPrice) / 100 * countryPercent + parseInt(totalPrice);
-                    resultTotal.innerHTML = `${finalResult}`;
-                    // FooterResult
-                    const result = percent.map((num) => parseInt(totalPrice) / 100 * num + parseInt(totalPrice));
-                    const renderResultList = result.map(renderResult)
 
-                    if(resultList && Array.isArray(renderResultList)) {
-                        resultList.innerHTML = renderResultList.join('');
-                    }
+                    calcAll();
+
                 } else if (!input.checked) {
-                    // TotalResult
+
                     totalPrice -= parseInt(input.value);
                     total.innerHTML = `${totalPrice}$`;
-                    // ResultInfo
-                    resultTotal.innerHTML = `${totalPrice}`;
-                    // FooterResult - fix
-                    const result = percent.map((num) => parseInt(totalPrice) / 100 * num + parseInt(totalPrice));
-                    const renderResultList = result.map(renderResult)
 
-                    if(resultList && Array.isArray(renderResultList)) {
-                        resultList.innerHTML = renderResultList.join('');
-                    }
+                    calcAll();
+
                 }
             })
         }
@@ -110,14 +105,31 @@ const countries = [
     {name: 'Japan', percent: 20, img: 'jap'}
 ];
 
+{
+    const switchBtn = document.querySelector('.switch');
+
+    switchBtn.addEventListener('click', function switchMode() {
+        const el = document.body;
+        const header = document.querySelector('.header');
+        const switchBtn = document.querySelector('.switch');
+        const resultBlock = document.querySelector('.result-block');
+        const resultCurrency = document.querySelector('.result-currency');
+        const wCountries = document.querySelector('.wrapper-countries')
+
+        el.classList.toggle('body-dark');
+        header.classList.toggle('header-dark');
+        switchBtn.classList.toggle('switch-dark');
+        resultBlock.classList.toggle('result-block__dark');
+        resultCurrency.classList.toggle('result-currency__dark');
+        wCountries.classList.toggle('wrapper-countries__dark')
+    });
+}
 
 function renderInfo(item) {
     return `<div class="country-name">${item.name}</div>
-            <div class="country-icon" style="background-image: url('assets/images/${item.img}.svg')"></div>
+            <div class="country-icon" style="background-image: url('/assets/images/${item.img}.svg')"></div>
             <div class="country-percent">${item.percent}%</div>`
 }
-
-const toLowerCase = (str) => typeof srt === 'string' ? str.toLowerCase() : str;
 
 function renderResult(item) {
     return `<div class="result-item">${item}$</div>`
@@ -143,7 +155,7 @@ function renderSelectCountry(item) {
 
 function renderCountry(items) {
     return `<div class="countries-container">
-                <div class="countries-flag" style="background-image: url('assets/images/${items.img}.svg')"></div>
+                <div class="countries-flag" style="background-image: url('/assets/images/${items.img}.svg')"></div>
                 <div class="item-name">${items.name}</div>
 </div>`
 }
@@ -151,22 +163,3 @@ function renderCountry(items) {
 function getPercent(item) {
     return item.percent;
 }
-
-const switchBtn = document.querySelector('.switch');
-
-switchBtn.addEventListener('click', function switchMode () {
-    const el = document.body;
-    const header = document.querySelector('.header');
-    const switchBtn = document.querySelector('.switch');
-    const resultBlock = document.querySelector('.result-block');
-    const resultCurrency = document.querySelector('.result-currency');
-    const wCountries = document.querySelector('.wrapper-countries')
-
-    el.classList.toggle('body-dark');
-    header.classList.toggle('header-dark');
-    switchBtn.classList.toggle('switch-dark');
-    resultBlock.classList.toggle('result-block__dark');
-    resultCurrency.classList.toggle('result-currency__dark');
-    wCountries.classList.toggle('wrapper-countries__dark')
-});
-
